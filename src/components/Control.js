@@ -8,13 +8,12 @@ class Control extends Component {
     return (
         <div className="row mt-3">
             {/* Search */}
-            <Search onSearchTask={this.props.onSearchTask} />
+            <Search />
             {/* Sort */}
-            <Sort onSortTask={this.props.onSortTask} />
+            <Sort />
         </div>
     );
   }
-  
 }
 
 export default Control;

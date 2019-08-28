@@ -1,28 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../actions/index';
 
 class Sort extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      sort: {
-        by: 'name',
-        value: 1
-      }
-    }
-  }
-
   onSortTask = (sortBy, sortValue) => {
-    this.setState({
-      sort: {
-        by: sortBy,
-        value: sortValue
-      }
-    });
-    this.props.onSortTask({by: sortBy, value: sortValue});
+    this.props.sortTask({by: sortBy, value: sortValue});
   }
 
   render() {
-    let { sort } = this.state;
+    let { sort } = this.props;
     return (
         <div className="col-6 col-sm-6 col-md-6 col-lg-6">
           <div className="dropdown">
@@ -58,7 +44,20 @@ class Sort extends Component {
         </div>
     );
   }
-  
 }
 
-export default Sort;
+const mapStateToProps = store => {
+  return {
+    sort: store.sort
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    sortTask: sort => {
+      dispatch(actions.sortTask(sort));
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sort);
